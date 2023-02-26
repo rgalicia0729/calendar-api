@@ -1,14 +1,11 @@
 const express = require('express');
+require('dotenv').config();
 
-const PORT = 4000;
+const PORT = process.env.PORT;
 const app = express();
 
-app.get('/', (req, res) => {
-    res.json({
-        ok: true,
-        message: 'Hola Mundo!!!'
-    });
-});
+// Routes
+app.use('/api/auth', require('./routes/auth'));
 
 app.listen(PORT, () => {
     console.log(`Server listening on the port ${PORT}`);
