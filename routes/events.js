@@ -22,7 +22,16 @@ router.post(
     createEvent
 );
 
-router.put('/:id', updateEvent);
+router.put(
+    '/:id',
+    [
+        check('title', 'El titulo de la nota es obligatorio').not().isEmpty(),
+        check('start', 'La fecha de inicio es obligatoria').custom(isDate),
+        check('end', 'Fecha de finalización es obligatoria').custom(isDate),
+        fieldsValidator
+    ],
+    updateEvent
+);
 
 router.delete('/:id', deleteEvent);
 
